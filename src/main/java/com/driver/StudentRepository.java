@@ -29,14 +29,17 @@ public class StudentRepository {
     }
 
     public void addStudentTeacherPair(String student, String teacher) {
+        if(!teacherHashMap.containsKey(teacher))return;
         if (teacherMap.containsKey(teacher)) {
             List<String> studentList = teacherMap.get(teacher);
             studentList.add(student);
             teacherMap.put(teacher, studentList);
+            teacherHashMap.get(teacher).setNumberOfStudents(teacherHashMap.get(teacher).getNumberOfStudents() + 1);
         }else {
             List<String> studentList = new ArrayList<>();
             studentList.add(student);
             teacherMap.put(teacher, studentList);
+            teacherHashMap.get(teacher).setNumberOfStudents(1);
         }
     }
 
