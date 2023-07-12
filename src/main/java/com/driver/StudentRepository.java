@@ -29,7 +29,7 @@ public class StudentRepository {
     }
 
     public void addStudentTeacherPair(String student, String teacher) {
-        if (teacherHashMap.containsKey(teacher)) {
+        if (teacherMap.containsKey(teacher)) {
             List<String> studentList = teacherMap.get(teacher);
             studentList.add(student);
         }else {
