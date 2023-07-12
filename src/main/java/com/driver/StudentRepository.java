@@ -11,7 +11,7 @@ import java.util.List;
 public class StudentRepository {
     HashMap<String, Student> studentHashMap = new HashMap<>(); //Student Name -> Student
     HashMap<String, Teacher> teacherHashMap = new HashMap<>(); //Teacher Name -> Teacher
-    HashMap<String, List<String>> teacherMap = new HashMap<>();
+    HashMap<String, List<String>> teacherMap = new HashMap<>(); //Teacher Name -> List<Students>
     public Student addStudent(Student student) {
         String name = student.getName();
         if (!studentHashMap.containsKey(name)) {
@@ -32,6 +32,7 @@ public class StudentRepository {
         if (teacherMap.containsKey(teacher)) {
             List<String> studentList = teacherMap.get(teacher);
             studentList.add(student);
+            teacherMap.put(teacher, studentList);
         }else {
             List<String> studentList = new ArrayList<>();
             studentList.add(student);
@@ -79,7 +80,6 @@ public class StudentRepository {
     }
 
     public void deleteAllTeachers() {
-        studentHashMap.clear();
         teacherMap.clear();
         teacherHashMap.clear();
     }
