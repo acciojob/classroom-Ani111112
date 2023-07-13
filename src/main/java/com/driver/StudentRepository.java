@@ -14,32 +14,25 @@ public class StudentRepository {
     HashMap<String, List<String>> teacherMap = new HashMap<>(); //Teacher Name -> List<Students>
     public Student addStudent(Student student) {
         String name = student.getName();
-        if (!studentHashMap.containsKey(name)) {
-            studentHashMap.put(name, student);
-        }
+        studentHashMap.put(name, student);
         return student;
     }
 
     public Teacher addTeacher(Teacher teacher) {
         String name = teacher.getName();
-        if (!teacherHashMap.containsKey(name)) {
-            teacherHashMap.put(name, teacher);
-        }
+        teacherHashMap.put(name, teacher);
         return teacher;
     }
 
     public void addStudentTeacherPair(String student, String teacher) {
-        if(!teacherHashMap.containsKey(teacher))return;
         if (teacherMap.containsKey(teacher)) {
             List<String> studentList = teacherMap.get(teacher);
             studentList.add(student);
             teacherMap.put(teacher, studentList);
-            teacherHashMap.get(teacher).setNumberOfStudents(teacherHashMap.get(teacher).getNumberOfStudents() + 1);
         }else {
             List<String> studentList = new ArrayList<>();
             studentList.add(student);
             teacherMap.put(teacher, studentList);
-            teacherHashMap.get(teacher).setNumberOfStudents(1);
         }
     }
 
@@ -74,12 +67,12 @@ public class StudentRepository {
     }
 
     public void deleteTeacherByName(String teacher) {
-        if (teacherHashMap.containsKey(teacher)) {
-            teacherHashMap.remove(teacher);
-            if (teacherMap.containsKey(teacher)) {
-                teacherMap.remove(teacher);
-            }
-        }
+        teacherHashMap.remove(teacher);
+        List<String> students = teacherMap.get(teacher);
+        teacherMap.remove(teacher);
+//        for (String student : students) {
+//            studentHashMap.remove(student);
+//        }
     }
 
     public void deleteAllTeachers() {
