@@ -70,13 +70,20 @@ public class StudentRepository {
         teacherHashMap.remove(teacher);
         List<String> students = teacherMap.get(teacher);
         teacherMap.remove(teacher);
-//        for (String student : students) {
-//            studentHashMap.remove(student);
-//        }
+        for (String student : students) {
+            studentHashMap.remove(student);
+        }
     }
 
     public void deleteAllTeachers() {
-        teacherMap.clear();
-        teacherHashMap.clear();
+        for (String teacher : teacherMap.keySet()) {
+            List<String> students = teacherMap.get(teacher);
+
+            teacherHashMap.remove(teacher);
+            teacherMap.remove(teacher);
+            for (String student : students) {
+                studentHashMap.remove(student);
+            }
+        }
     }
 }
